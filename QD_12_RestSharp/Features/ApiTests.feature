@@ -3,10 +3,10 @@ API tests performed for 2 endpoints:
 tag1 tests - reqres.in
 tag2 tests - api.mathjs.org
 
-@tag1
+@task1
 Scenario Outline: Execute API tests - GET call
-Given a User navigates to page https://reqres.in/api
-When a User executes a GET call to <endpoint>
+Given a base URL is https://reqres.in/api
+When GET call executed to <endpoint>
 Then the status code is <code>
 
 Examples: 
@@ -16,66 +16,46 @@ Examples:
 | Get single <2>            | /unknown/2     | 200  |
 | Get delayed response      | /users?delay=3 | 200  |
 
-@tag1
-Scenario:  Execute API tests - POST/PUT/PATCH/DELETE call
-#Post create
-Given a User navigates to page https://reqres.in/api
-When a User executes a POST call to /api/users using
-| key  | value    |
-| name | morpheus |
-| job  | leader   |
-Then the status code is 201
+@task1
+Scenario Outline:  Execute API tests - POST/PUT/PATCH call
+Given a base URL is https://reqres.in/api
+When <method> is executed to <endpoint> using
+| key    | value    |
+| <key1> | <value1> |
+| <key2> | <value2> |
+Then the status code is <code>
 And the following fields and values are in the response
-| key  | value    |
-| name | morpheus |
-| job  | leader   |
-#Put update
-When a User executes a PUT call to /api/users/2 using
-| key  | value         |
-| name | morpheus      |
-| job  | zion resident |
-Then the status code is 200
-And the following fields and values are in the response
-| key  | value         |
-| name | morpheus      |
-| job  | zion resident |
-#Patch update
-When a User executes a PATCH call to /api/users/2 using
-| key  | value         |
-| name | morpheus      |
-| job  | zion resident |
-Then the status code is 200
-And the following fields and values are in the response
-| key  | value         |
-| name | morpheus      |
-| job  | zion resident |
-#Delete delete
-When a User executes a DELETE call to /api/users/2 using
-| key  | value         |
-| name | morpheus      |
-| job  | zion resident |
-Then the status code is 204
-#Post register successful 
-When a User executes a POST call to /api/register using
-| key      | value              |
-| email    | eve.holt@reqres.in |
-| password | pistol             |
-Then the status code is 201
-#Post login unsuccessful
-When a User executes a POST call to /api/login using
-| key   | value        |
-| email | peter@klaven |
-#following step response in spec is 400, but 201 received
-#Then the status code is 400
-#And the following fields and values are in the response
-#| key   | value            |
-#| error | Missing password |
+| key    | value    |
+| <key1> | <value1> |
+| <key2> | <value2> |
+
+Examples: 
+| ScenarioName            | method             | endpoint     | code | key1  | value1       | key2 | value2        |
+| Post create             | POST               | /api/users   | 201  | name  | morpheus     | job  | leader        |
+| Put update              | PUT                | /api/users/2 | 200  | name  | morpheus     | job  | zion resident |
+| Patch update            | PATCH              | /api/users/2 | 200  | name  | morpheus     | job  | zion resident |
+
+@task1
+Scenario Outline: Execute API tests - Register/Login/Delete
+#login step response in spec is 400, but 201 received
+Given a base URL is https://reqres.in/api
+When <method> is executed to <endpoint> using
+| key    | value    |
+| <key1> | <value1> |
+| <key2> | <value2> |
+Then the status code is <code>
+
+Examples: 
+| ScenarioName             | method | endpoint      | code | key1  | value1             | key2     | value2        |
+| Delete delete            | DELETE | /api/users/2  | 204  | name  | morpheus           | job      | zion resident |
+| Post register successful | POST   | /api/register | 201  | email | eve.holt@reqres.in | password | pistol        |
+| Post login unsuccessful  | POST   | /api/login    | 400  | email | peter@klaven       | -        | -             |
 
 
-@tag2
+@task2
 Scenario Outline: Math API - math operations
-Given a User navigates to page http://api.mathjs.org/v4/
-When a User performs <operation> with <expression>
+Given a base URL is http://api.mathjs.org/v4/
+When <operation> action is executed with <expression>
 Then the status code is <code>
 And the <expectedResult> is in the response
 

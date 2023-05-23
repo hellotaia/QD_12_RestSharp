@@ -20,8 +20,8 @@ namespace QD_12_RestSharp.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Feature1")]
-    public partial class Feature1Feature
+    [NUnit.Framework.DescriptionAttribute("RestSharp")]
+    public partial class RestSharpFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -35,7 +35,8 @@ namespace QD_12_RestSharp.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Feature1", "A short summary of the feature", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "RestSharp", "API tests performed for 2 endpoints: \r\ntag1 tests - reqres.in\r\ntag2 tests - api.m" +
+                    "athjs.org", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -75,7 +76,7 @@ namespace QD_12_RestSharp.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Execute API tests - GET call")]
-        [NUnit.Framework.CategoryAttribute("tag1")]
+        [NUnit.Framework.CategoryAttribute("task1")]
         [NUnit.Framework.TestCaseAttribute("Get list users", "/users?page=2", "200", null)]
         [NUnit.Framework.TestCaseAttribute("Get single user not found", "/users/23", "404", null)]
         [NUnit.Framework.TestCaseAttribute("Get single <2>", "/unknown/2", "200", null)]
@@ -83,7 +84,7 @@ namespace QD_12_RestSharp.Features
         public virtual void ExecuteAPITests_GETCall(string scenarioName, string endpoint, string code, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "tag1"};
+                    "task1"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -94,7 +95,7 @@ namespace QD_12_RestSharp.Features
             argumentsOfScenario.Add("endpoint", endpoint);
             argumentsOfScenario.Add("code", code);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Execute API tests - GET call", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 6
+#line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -114,13 +115,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 7
-testRunner.Given("a User navigates to page https://reqres.in/api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
 #line 8
-testRunner.When(string.Format("a User executes a GET call to {0}", endpoint), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Given("a base URL is https://reqres.in/api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 9
+testRunner.When(string.Format("GET call executed to {0}", endpoint), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 10
 testRunner.Then(string.Format("the status code is {0}", code), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -128,15 +129,31 @@ testRunner.Then(string.Format("the status code is {0}", code), ((string)(null)),
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Execute API tests - POST/PUT/PATCH/DELETE call")]
-        [NUnit.Framework.CategoryAttribute("tag1")]
-        public virtual void ExecuteAPITests_POSTPUTPATCHDELETECall()
+        [NUnit.Framework.DescriptionAttribute("Execute API tests - POST/PUT/PATCH call")]
+        [NUnit.Framework.CategoryAttribute("task1")]
+        [NUnit.Framework.TestCaseAttribute("Post create", "POST", "/api/users", "201", "name", "morpheus", "job", "leader", null)]
+        [NUnit.Framework.TestCaseAttribute("Put update", "PUT", "/api/users/2", "200", "name", "morpheus", "job", "zion resident", null)]
+        [NUnit.Framework.TestCaseAttribute("Patch update", "PATCH", "/api/users/2", "200", "name", "morpheus", "job", "zion resident", null)]
+        public virtual void ExecuteAPITests_POSTPUTPATCHCall(string scenarioName, string method, string endpoint, string code, string key1, string value1, string key2, string value2, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
-                    "tag1"};
+            string[] @__tags = new string[] {
+                    "task1"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Execute API tests - POST/PUT/PATCH/DELETE call", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 19
+            argumentsOfScenario.Add("ScenarioName", scenarioName);
+            argumentsOfScenario.Add("method", method);
+            argumentsOfScenario.Add("endpoint", endpoint);
+            argumentsOfScenario.Add("code", code);
+            argumentsOfScenario.Add("key1", key1);
+            argumentsOfScenario.Add("value1", value1);
+            argumentsOfScenario.Add("key2", key2);
+            argumentsOfScenario.Add("value2", value2);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Execute API tests - POST/PUT/PATCH call", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 20
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -157,156 +174,65 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 21
-testRunner.Given("a User navigates to page https://reqres.in/api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("a base URL is https://reqres.in/api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                             "key",
                             "value"});
                 table1.AddRow(new string[] {
-                            "name",
-                            "morpheus"});
+                            string.Format("{0}", key1),
+                            string.Format("{0}", value1)});
                 table1.AddRow(new string[] {
-                            "job",
-                            "leader"});
+                            string.Format("{0}", key2),
+                            string.Format("{0}", value2)});
 #line 22
-testRunner.When("a User executes a POST call to /api/users using", ((string)(null)), table1, "When ");
+testRunner.When(string.Format("{0} is executed to {1} using", method, endpoint), ((string)(null)), table1, "When ");
 #line hidden
 #line 26
-testRunner.Then("the status code is 201", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then(string.Format("the status code is {0}", code), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                             "key",
                             "value"});
                 table2.AddRow(new string[] {
-                            "name",
-                            "morpheus"});
+                            string.Format("{0}", key1),
+                            string.Format("{0}", value1)});
                 table2.AddRow(new string[] {
-                            "job",
-                            "leader"});
+                            string.Format("{0}", key2),
+                            string.Format("{0}", value2)});
 #line 27
 testRunner.And("the following fields and values are in the response", ((string)(null)), table2, "And ");
-#line hidden
-                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
-                            "key",
-                            "value"});
-                table3.AddRow(new string[] {
-                            "name",
-                            "morpheus"});
-                table3.AddRow(new string[] {
-                            "job",
-                            "zion resident"});
-#line 32
-testRunner.When("a User executes a PUT call to /api/users/2 using", ((string)(null)), table3, "When ");
-#line hidden
-#line 36
-testRunner.Then("the status code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
-                            "key",
-                            "value"});
-                table4.AddRow(new string[] {
-                            "name",
-                            "morpheus"});
-                table4.AddRow(new string[] {
-                            "job",
-                            "zion resident"});
-#line 37
-testRunner.And("the following fields and values are in the response", ((string)(null)), table4, "And ");
-#line hidden
-                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
-                            "key",
-                            "value"});
-                table5.AddRow(new string[] {
-                            "name",
-                            "morpheus"});
-                table5.AddRow(new string[] {
-                            "job",
-                            "zion resident"});
-#line 42
-testRunner.When("a User executes a PATCH call to /api/users/2 using", ((string)(null)), table5, "When ");
-#line hidden
-#line 46
-testRunner.Then("the status code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
-                            "key",
-                            "value"});
-                table6.AddRow(new string[] {
-                            "name",
-                            "morpheus"});
-                table6.AddRow(new string[] {
-                            "job",
-                            "zion resident"});
-#line 47
-testRunner.And("the following fields and values are in the response", ((string)(null)), table6, "And ");
-#line hidden
-                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
-                            "key",
-                            "value"});
-                table7.AddRow(new string[] {
-                            "name",
-                            "morpheus"});
-                table7.AddRow(new string[] {
-                            "job",
-                            "zion resident"});
-#line 52
-testRunner.When("a User executes a DELETE call to /api/users/2 using", ((string)(null)), table7, "When ");
-#line hidden
-#line 56
-testRunner.Then("the status code is 204", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
-                            "key",
-                            "value"});
-                table8.AddRow(new string[] {
-                            "email",
-                            "eve.holt@reqres.in"});
-                table8.AddRow(new string[] {
-                            "password",
-                            "pistol"});
-#line 58
-testRunner.When("a User executes a POST call to /api/register using", ((string)(null)), table8, "When ");
-#line hidden
-#line 62
-testRunner.Then("the status code is 201", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
-                            "key",
-                            "value"});
-                table9.AddRow(new string[] {
-                            "email",
-                            "peter@klaven"});
-#line 64
-testRunner.When("a User executes a POST call to /api/login using", ((string)(null)), table9, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Math API - math operations")]
-        [NUnit.Framework.CategoryAttribute("tag2")]
-        [NUnit.Framework.TestCaseAttribute("Multiply", "2*6", "12", "200", null)]
-        [NUnit.Framework.TestCaseAttribute("Divide", "10 / 2", "5", "200", null)]
-        [NUnit.Framework.TestCaseAttribute("Add", "4+5", "9", "200", null)]
-        [NUnit.Framework.TestCaseAttribute("Subtract", "8 - 3", "5", "200", null)]
-        [NUnit.Framework.TestCaseAttribute("SquareRoot", "sqrt(16)", "4", "200", null)]
-        public virtual void MathAPI_MathOperations(string operation, string expression, string expectedResult, string code, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("Execute API tests - Register/Login/Delete")]
+        [NUnit.Framework.CategoryAttribute("task1")]
+        [NUnit.Framework.TestCaseAttribute("Delete delete", "DELETE", "/api/users/2", "204", "name", "morpheus", "job", "zion resident", null)]
+        [NUnit.Framework.TestCaseAttribute("Post register successful", "POST", "/api/register", "201", "email", "eve.holt@reqres.in", "password", "pistol", null)]
+        [NUnit.Framework.TestCaseAttribute("Post login unsuccessful", "POST", "/api/login", "400", "email", "peter@klaven", "-", "-", null)]
+        public virtual void ExecuteAPITests_RegisterLoginDelete(string scenarioName, string method, string endpoint, string code, string key1, string value1, string key2, string value2, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "tag2"};
+                    "task1"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("operation", operation);
-            argumentsOfScenario.Add("expression", expression);
-            argumentsOfScenario.Add("expectedResult", expectedResult);
+            argumentsOfScenario.Add("ScenarioName", scenarioName);
+            argumentsOfScenario.Add("method", method);
+            argumentsOfScenario.Add("endpoint", endpoint);
             argumentsOfScenario.Add("code", code);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Math API - math operations", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 75
+            argumentsOfScenario.Add("key1", key1);
+            argumentsOfScenario.Add("value1", value1);
+            argumentsOfScenario.Add("key2", key2);
+            argumentsOfScenario.Add("value2", value2);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Execute API tests - Register/Login/Delete", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 39
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -326,16 +252,81 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 76
-testRunner.Given("a User navigates to page http://api.mathjs.org/v4/", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 41
+testRunner.Given("a base URL is https://reqres.in/api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 77
-testRunner.When(string.Format("a User performs {0} with {1}", operation, expression), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                            "key",
+                            "value"});
+                table3.AddRow(new string[] {
+                            string.Format("{0}", key1),
+                            string.Format("{0}", value1)});
+                table3.AddRow(new string[] {
+                            string.Format("{0}", key2),
+                            string.Format("{0}", value2)});
+#line 42
+testRunner.When(string.Format("{0} is executed to {1} using", method, endpoint), ((string)(null)), table3, "When ");
 #line hidden
-#line 78
+#line 46
 testRunner.Then(string.Format("the status code is {0}", code), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 79
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Math API - math operations")]
+        [NUnit.Framework.CategoryAttribute("task2")]
+        [NUnit.Framework.TestCaseAttribute("Multiply", "2*6", "12", "200", null)]
+        [NUnit.Framework.TestCaseAttribute("Divide", "10 / 2", "5", "200", null)]
+        [NUnit.Framework.TestCaseAttribute("Add", "4+5", "9", "200", null)]
+        [NUnit.Framework.TestCaseAttribute("Subtract", "8 - 3", "5", "200", null)]
+        [NUnit.Framework.TestCaseAttribute("SquareRoot", "sqrt(16)", "4", "200", null)]
+        public virtual void MathAPI_MathOperations(string operation, string expression, string expectedResult, string code, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "task2"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("operation", operation);
+            argumentsOfScenario.Add("expression", expression);
+            argumentsOfScenario.Add("expectedResult", expectedResult);
+            argumentsOfScenario.Add("code", code);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Math API - math operations", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 56
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 57
+testRunner.Given("a base URL is http://api.mathjs.org/v4/", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 58
+testRunner.When(string.Format("{0} action is executed with {1}", operation, expression), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 59
+testRunner.Then(string.Format("the status code is {0}", code), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 60
 testRunner.And(string.Format("the {0} is in the response", expectedResult), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
